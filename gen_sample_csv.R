@@ -5,6 +5,7 @@
 library(dplyr)
 library(data.table)
 
+### This should be renamed. This function is for making the three repeats for index
 my_function <- function(incol)
 {
     n <- 3
