@@ -64,15 +64,12 @@ new <- as.data.frame(transposed_label,stringsAsFactors = FALSE) %>% group_by(as.
 ###Replace collapse with AA AT TT etc
 new_col <- mapply(best_guess_to_allele,new$val,t(data_gene)[4],t(data_gene)[5])
 
-new_table <- cbind(data_samples$ID_1[-1],new_col)
+new_table <- data.frame(data_samples$ID_1[-1],new_col, names(new_col))
 
-colnames(new_table) <- c("id","genotype")
 
-new_table2 <- setDT(as.data.frame(new_table), keep.rownames = "best_guess")[]
-
-new_table3 <- new_table2[,c(2,1,3)]
+colnames(new_table) <- c("id","genotype","dossage")
 
 
 ###to write the gene file as a transposed csv
 
-write.csv(new_table3, file = "rs641738.csv")
+write.csv(new_table, file = "rs641738_new.csv",row.names=FALSE)
